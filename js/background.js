@@ -1,7 +1,7 @@
 /* global chrome */
 
 (function () {
-    var SCRIPT_URL = location.protocol + "//zirro-prudo.rhcloud.com/js/menupicker.js";
+    var SCRIPT_URL = location.protocol + "//schedule-extensione.rhcloud.com/js/menupicker.js";
 
     var code = "";
     var data = {schedule: null, anchor: null};
