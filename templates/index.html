@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="/js/lib/moment.min.js" type="text/javascript"></script>
+        <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/js/popup.js"></script>
+
+
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/main.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div id="content">
+            <div id="message"></div>
+            <div id="schedule" style="display: none;">
+                <div class="clearfix">
+
+
+                </div>
+                <h2 id="schedule-header">
+                    <span id="schedule-group"></span>
+                </h2>
+
+                <div id="schedule-slider" class="carousel slide">
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox"></div>
+                    <!-- Indicators -->
+                    <div class="clearfix" id="schedule-slider-footer">
+                        <span class="glyphicon glyphicon-arrow-left pull-left btn-xs" title="прошедшая неделя" id="prev-week"></span>
+                        <ol class="carousel-indicators"></ol>
+                        <span class="glyphicon glyphicon-arrow-right pull-right btn-xs" title="следующая неделя" id="next-week"></span>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#schedule-slider" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#schedule-slider" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

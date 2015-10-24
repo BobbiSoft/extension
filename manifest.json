@@ -1,0 +1,30 @@
+{
+    "manifest_version": 2,
+    "name": "Расписание",
+    "version": "0.1.0",
+    "description": "Быстрый доступ к расписанию в вашем браузере",
+    "icons": {
+        "16": "img/icon_16.png",
+        "48": "img/icon_48.png"
+    },
+    "permissions": ["tabs", "*://*/*", "webNavigation", "activeTab"],
+    "browser_action": {
+        "default_title": "Посмотреть расписание",
+        "default_icon": "img/icon_19.png",
+        "default_popup": "templates/index.html"
+    },
+    "content_security_policy": "script-src 'unsafe-eval' 'self' https://ajax.googleapis.com; object-src 'self' ",
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://*/*"],
+            "js": ["js/init.js"]
+        }
+    ],
+    "externally_connectable":{
+        "matches": ["*://my-alternate.rhcloud.com/*"]
+    }
+}
