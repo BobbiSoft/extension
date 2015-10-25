@@ -7,7 +7,7 @@
         "16": "img/icon_16.png",
         "48": "img/icon_48.png"
     },
-    "permissions": ["tabs", "*://*/*", "webNavigation", "activeTab"],
+    "permissions": ["tabs", "*://*/*", "activeTab"],
     "browser_action": {
         "default_title": "Посмотреть расписание",
         "default_icon": "img/icon_19.png",

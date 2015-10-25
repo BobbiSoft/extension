@@ -57,11 +57,13 @@ body{
 }
 #schedule-slider-footer{
     text-align: center;
+    padding: 0 23px;
 }
 #schedule-slider-footer .btn-xs{
     color: #e1e1e1;
     cursor: pointer;
     font-size: 13px;
+    margin: 0 -23px;
 }
 #schedule-slider-footer .btn-xs:hover{
     color: #777;

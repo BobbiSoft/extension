@@ -13,14 +13,16 @@ $(function () {
     var anchor = 0;
     var prevWeek = $("#prev-week");
     var nextWeek = $("#next-week");
+    var currDate = null;
 
 
 
 
     chrome.runtime.sendMessage({text: "schedule"}, function (data) {
         message.html(messages.wait);
-        if (data.schedule) {
+        if (data) {
             anchor = data.anchor;
+            currDate = new Date(data.date);
             if (anchor === -1) prevWeek.hide();
             if (anchor === 1) nextWeek.hide();
             renderSchedule(data.schedule);
@@ -33,8 +35,9 @@ $(function () {
     });
 
     function getSchedule() {
-        $.get(SCHEDULE_URL + id + "&" + anchor).success(function (response) {
-            chrome.runtime.sendMessage({text: "schedule", data: {schedule: response, anchor: anchor}});
+        $.get(SCHEDULE_URL + id + "&" + anchor).success(function (response, res, xhr) {
+            currDate = new Date(xhr.getResponseHeader("Date"));
+            chrome.runtime.sendMessage({text: "schedule", data: {schedule: response, anchor: anchor, date: currDate.toString()}});
             renderSchedule(response);
         }).error(function () {
             message.html(messages.error).show();
@@ -78,7 +81,13 @@ $(function () {
             slider.append(d.day);
             indicators.append(d.indicator);
         });
-        if (anchor !== 0) {
+        var cD = currDate.getDay() - 1;
+        if (cD === -1) cD = 6;
+        if (anchor === 0 && cD !== 6 || (anchor === -1 && cD === 6)) {
+            slider.find(".item:eq(" + cD + ")").addClass("panel-danger active");
+            indicators.find("li:eq(" + cD + ")").addClass("active");
+        }
+        else {
             slider.find(".item:first").addClass("active");
             indicators.find("li:first").addClass("active");
         }
@@ -90,8 +99,7 @@ $(function () {
         });
 
         function renderDay(day, indx) {
-            var isCurrentDay = date(day.date) === date(Date.now());
-            var container = $('<div class="item">').addClass('panel ' + (isCurrentDay ? 'panel-danger active' : 'panel-info'));
+            var container = $('<div class="item">').addClass('panel panel-info');
             container.append($('<div>').addClass('panel-heading').text(day.name + ' ' + date(day.date)));
             var table = $('<table>').addClass('table table-hover');
             table.append($('<col>').addClass('lesson_number'));
@@ -104,7 +112,6 @@ $(function () {
             container.append(table);
 
             var indicator = $('<li data-slide-to="' + indx + '" data-target="#schedule-slider"></li>');
-            if (isCurrentDay) indicator.addClass("active");
 
             return {day: container, indicator: indicator};
         }
